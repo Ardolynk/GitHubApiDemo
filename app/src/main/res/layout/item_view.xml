@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="44pt"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="2pt"
+        android:layout_marginBottom="2pt">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id = "@+id/avatar"
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:src="@drawable/avatar_placeholder" />
+        <TextView
+            android:id = "@+id/owner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avatar"
+            android:textSize="6pt" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8pt"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/stars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4pt"
+            android:textSize="8pt"
+            android:drawableLeft="@drawable/star" />
+    </LinearLayout>
+
+</LinearLayout>

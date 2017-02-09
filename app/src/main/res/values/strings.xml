@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GitHub Demo (Kotlin)</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search in projects</string>
+    <string name="list_hint_load">Pull down to load</string>
+    <string name="list_hint_more">More...</string>
+    <string name="network_error">A network error occurred</string>
+    <string name="parse_error">Failed to parse data</string>
+    <string name="forbidden_error">Too many requests, please retry in a minute</string>
+</resources>
