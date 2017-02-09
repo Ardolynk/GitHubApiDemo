@@ -22,6 +22,7 @@ public class GHData implements Serializable {
         @SerializedName("stargazers_count")
         private int starCount;
         private Owner owner;
+        @SerializedName("html_url") private String projectURL;
 
         @Data
         public class Owner {

@@ -205,6 +205,9 @@ public class GHDataService extends Service {
                         if (!mActualSearchString.equals(mRecentSearchString)) {
                             resultFlags |= FLAG_CONDITION_CHANGED;
                         }
+                        if (continueLoading) {
+                            resultFlags |= FLAG_APPEND;
+                        }
                         resultBundle.putInt(RESULT_FLAGS, resultFlags);
                         final int errorStringResource = (error.networkResponse.statusCode == STATUS_FORBIDDEN ?
                                 R.string.forbidden_error : R.string.network_error);

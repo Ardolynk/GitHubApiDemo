@@ -1,6 +1,8 @@
 package com.ardolynk.githubapidemo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,23 +102,34 @@ public class GHListAdapter extends ArrayAdapter<GHData.Item> {
             return mSentinelViewNormal;
         }
 
-        GHData.Item item = getItem(position);
+        final GHData.Item item = getItem(position);
 
         if (convertView == null || convertView == mSentinelViewNormal || convertView == mSentinelViewFailure) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_view, parent, false);
         }
 
-        TextView fullNameView = (TextView) convertView.findViewById(R.id.full_name);
+        final TextView fullNameView = (TextView) convertView.findViewById(R.id.full_name);
         fullNameView.setText(item.getProjectName());
 
-        NetworkImageView avatarView = (NetworkImageView) convertView.findViewById(R.id.avatar);
+        final NetworkImageView avatarView = (NetworkImageView) convertView.findViewById(R.id.avatar);
         mService.loadAvatar(avatarView, item);
 
-        TextView ownerNameView = (TextView) convertView.findViewById(R.id.owner_name);
+        final TextView ownerNameView = (TextView) convertView.findViewById(R.id.owner_name);
         ownerNameView.setText(item.getOwner().getLogin());
 
-        TextView starCountView = (TextView) convertView.findViewById(R.id.stars);
+        final TextView starCountView = (TextView) convertView.findViewById(R.id.stars);
         starCountView.setText(String.format(" %d", item.getStarCount()));
+
+        //Bonus feature - open a project page on click
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse(item.getProjectURL()));
+                getContext().startActivity(browserIntent);
+            }
+        });
 
         return convertView;
     }
