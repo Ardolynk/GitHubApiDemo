@@ -88,7 +88,6 @@ public class GHListAdapter extends ArrayAdapter<GHData.Item> {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (position == super.getCount()) {
