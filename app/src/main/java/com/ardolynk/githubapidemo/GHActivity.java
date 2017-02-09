@@ -135,6 +135,7 @@ public class GHActivity extends Activity {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 if (mRecentSearchString != null) {
+                    mRecentSearchString = null;
                     mService.startLoadingList("");
                     mRefreshLayout.setRefreshing(true);
                 }
