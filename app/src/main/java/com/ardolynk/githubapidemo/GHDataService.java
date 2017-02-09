@@ -59,8 +59,10 @@ public class GHDataService extends Service {
     public final static  int FLAG_ERROR = FLAG_CONDITION_CHANGED << 1;
 
     public final static int LIST_LOAD_FINISHED = 0;
-    public final static int PER_PAGE = 30;
-    public final static int STATUS_FORBIDDEN = 403;
+
+    private final static int IMAGE_CASHE_SIZE = 32;
+    private final static int PER_PAGE = 30;
+    private final static int STATUS_FORBIDDEN = 403;
 
     private ArrayList<GHData.Item> mRecentData;
     private int mPageNum;
@@ -79,7 +81,7 @@ public class GHDataService extends Service {
         mPageNum = 0;
         mRequestQueue = Volley.newRequestQueue(this);
         mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
-            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(16);
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(IMAGE_CASHE_SIZE);
 
             @Override
             public Bitmap getBitmap(String url) {
