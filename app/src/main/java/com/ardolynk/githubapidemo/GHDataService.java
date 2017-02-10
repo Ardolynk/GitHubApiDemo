@@ -2,24 +2,23 @@ package com.ardolynk.githubapidemo;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
-import android.util.LruCache;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -62,7 +61,6 @@ public class GHDataService extends Service {
 
     public final static int LIST_LOAD_FINISHED = 0;
 
-    private final static int IMAGE_CASHE_SIZE = 32;
     private final static int PER_PAGE = 30;
     private final static int STATUS_FORBIDDEN = 403;
 
@@ -71,7 +69,6 @@ public class GHDataService extends Service {
     private boolean mHasNext;
     private StringRequest mListRequest;
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
     private ResultReceiver mListLoadReceiver;
     private String mActualSearchString;
     private String mRecentSearchString;
@@ -82,19 +79,6 @@ public class GHDataService extends Service {
         mRecentSearchString = "";
         mPageNum = 0;
         mRequestQueue = Volley.newRequestQueue(this);
-        mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
-            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(IMAGE_CASHE_SIZE);
-
-            @Override
-            public Bitmap getBitmap(String url) {
-                return mCache.get(url);
-            }
-
-            @Override
-            public void putBitmap(String url, Bitmap bitmap) {
-                mCache.put(url, bitmap);
-            }
-        });
     }
 
     @Override
@@ -235,11 +219,9 @@ public class GHDataService extends Service {
      * @param imageView Destination view object
      * @param item Source data item containing image URL
      */
-    public void loadAvatar(NetworkImageView imageView, GHData.Item item) {
+    public void loadAvatar(ImageView imageView, GHData.Item item) {
         final String url = item.getOwner().getAvatarLink();
-        final int placeholderID = R.drawable.avatar_placeholder;
-        mImageLoader.get(url, ImageLoader.getImageListener(imageView, placeholderID, placeholderID));
-        imageView.setImageUrl(url, mImageLoader);
+        Picasso.with(this).load(url).into(imageView);
     }
 
     public class LocalBinder extends Binder {

@@ -12,7 +12,7 @@
         android:layout_marginTop="2pt"
         android:layout_marginBottom="2pt">
 
-        <com.android.volley.toolbox.NetworkImageView
+        <ImageView
             android:id = "@+id/avatar"
             android:layout_width="20pt"
             android:layout_height="20pt"
