@@ -9,3 +9,5 @@ Anroid 4.0.3 (API level 15)
 * Project search capability
 * List can be refreshed by pulling down
 * Project home page opens on item click
+
+*Warning:* for better avatar image support, I highly recommend `picasso` branch
