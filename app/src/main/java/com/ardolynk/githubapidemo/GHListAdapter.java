@@ -3,12 +3,12 @@ package com.ardolynk.githubapidemo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -110,7 +110,7 @@ public class GHListAdapter extends ArrayAdapter<GHData.Item> {
         final TextView fullNameView = (TextView) convertView.findViewById(R.id.full_name);
         fullNameView.setText(item.getProjectName());
 
-        final NetworkImageView avatarView = (NetworkImageView) convertView.findViewById(R.id.avatar);
+        final ImageView avatarView = (ImageView) convertView.findViewById(R.id.avatar);
         mService.loadAvatar(avatarView, item);
 
         final TextView ownerNameView = (TextView) convertView.findViewById(R.id.owner_name);
