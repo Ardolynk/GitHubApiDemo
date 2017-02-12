@@ -21,6 +21,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,7 +161,10 @@ public class GHDataService extends Service {
 
     private void processLoadingList(final boolean continueLoading, String searchString) {
         final int nextPageNum = (continueLoading ? mPageNum + 1 : 1);
-        String url = String.format(URL_TEMPLATE, mActualSearchString, nextPageNum, PER_PAGE);
+        String url = null;
+        try {
+            url = String.format(URL_TEMPLATE, URLEncoder.encode(mActualSearchString, "UTF-8"), nextPageNum, PER_PAGE);
+        } catch (UnsupportedEncodingException e) {}
         if (mListRequest != null) {
             mListRequest.cancel();
         }
